@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Barefoot NT NMB TV Guide — Connection Test</title>
+<style>body{font-family:system-ui,Arial;background:#10243a;color:#fff;margin:0;padding:24px 16px}main{max-width:600px;margin:auto}h1{color:#65c7ff}section{background:#fff;color:#18334a;padding:20px;border-radius:14px;margin-top:20px}button{background:#146a9c;color:white;border:0;border-radius:10px;padding:15px;font-size:17px;font-weight:bold;width:100%}#result{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f5f9;padding:14px;border-radius:8px;margin-top:16px}small{color:#5c6b78}a{color:#a4ddff}</style></head>
+<body><main><h1>📺 Barefoot NT NMB TV Guide</h1><p>Version 3.4 — Private connection diagnostic</p>
+<section><h2>South Carolina TV feed test</h2><p>This page checks whether your hosted website can directly access the free XMLTV feed. It does not publish or store TV listings.</p>
+<button id="test">Test automatic feed connection</button><div id="result" role="status">Ready to test.</div>
+<p><small>Even on GitHub Pages, the feed provider must permit cross-origin browser access (CORS). If blocked, we will need a different authorized delivery method.</small></p></section>
+<p><a href="./">← Back to homepage</a></p></main>
+<script>
+const url='https://vcicio.github.io/US-EPG/states/SC.xml.gz';
+document.getElementById('test').addEventListener('click',async()=>{
+ const out=document.getElementById('result');out.textContent='Connecting…';
+ const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),15000);
+ try{
+   const res=await fetch(url,{mode:'cors',cache:'no-store',signal:ctrl.signal});
+   if(!res.ok)throw new Error('HTTP '+res.status);
+   const data=await res.arrayBuffer();
+   out.textContent='SUCCESS: Browser received '+data.byteLength.toLocaleString()+' bytes from the South Carolina feed. Automatic loading is technically possible from this website. Schedule accuracy and redistribution permissions still need separate approval.';
+ }catch(e){
+   out.textContent='NOT AVAILABLE: Browser could not fetch the feed. '+(e.name==='AbortError'?'The request timed out.':e.message)+ '\n\nThis does not mean the feed is broken. It may block cross-origin browser requests (CORS). Your existing manual import remains our working fallback.';
+ }finally{clearTimeout(timer);}
+});
+</script></body></html>
