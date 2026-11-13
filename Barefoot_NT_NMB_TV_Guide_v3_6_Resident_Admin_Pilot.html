@@ -1,0 +1,383 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Barefoot NT NMB TV Guide v3.6</title><style>:root{font-family:system-ui,Arial;background:#eef3f8;color:#142a42}*{box-sizing:border-box}body{margin:0}header{background:#123b60;color:white;padding:22px 16px}main{max-width:850px;margin:auto;padding:14px}h1{font-size:24px;margin:0}p{line-height:1.45}.panel{background:white;border-radius:14px;padding:15px;margin-bottom:13px;box-shadow:0 2px 10px #18375212}input,select,button{font:inherit;padding:11px;border-radius:9px;border:1px solid #b7c9d9}input,select{width:100%;background:white}button{cursor:pointer;background:#e7f0f8;color:#123b60;font-weight:650}button.active,button.primary{background:#145c89;color:white;border-color:#145c89}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.toolbar button{flex:1}.primejump{background:#fff0cf;border-color:#d5a144;color:#6d4200}.primejump.active{background:#b76b0b;color:white;border-color:#b76b0b}.row{border-top:1px solid #e4eaf0;padding:12px 0;display:grid;grid-template-columns:55px 1fr auto;gap:10px;align-items:start}.num{font-weight:800;color:#145c89}.name{font-weight:700}.muted{font-size:12px;color:#586a7a}.program{font-size:13px;margin-top:6px}.fav{font-size:21px;border:0;background:transparent;padding:2px 7px}.schedule{grid-column:1/-1;background:#f3f7fb;border-radius:10px;padding:12px}.slot{border-bottom:1px solid #dce5ed;padding:7px 0;font-size:14px}.slot:last-child{border:0}.gridscroll{overflow:auto;max-height:65vh;border:1px solid #dce5ed;border-radius:10px}.guidegrid{min-width:1325px;font-size:12px}.gridrow{display:grid;grid-template-columns:125px repeat(8,150px);min-width:1325px;content-visibility:auto;contain-intrinsic-size:auto 60px}.gridrow.gridheader{content-visibility:visible;position:sticky;top:0;z-index:4}.gcell{padding:9px 6px;border-right:1px solid #dce5ed;border-bottom:1px solid #dce5ed;min-height:54px;overflow:hidden}.ghead{background:#123b60;color:white;font-weight:700;position:sticky;top:0;z-index:2}.gchannel{position:sticky;left:0;background:#e7f0f8;font-weight:700;z-index:1}.gcorner{z-index:3;left:0}.gchannel{display:flex;align-items:center;gap:4px}.gchannel .gridstar{flex:0 0 auto;border:0;background:transparent;padding:4px 5px;font-size:23px;line-height:1;color:#aa7400;cursor:pointer}.gchannel .gridstar:focus-visible{outline:2px solid #145c89}.gchannel .chlabel{min-width:0;overflow-wrap:anywhere}.currentTime{box-shadow:inset 3px 0 #ed8c21}.gprog{border:0;cursor:pointer;background:#f3f8fc;color:#183650;border-radius:5px;padding:5px;min-height:35px}dialog{border:0;border-radius:16px;max-width:90vw;box-shadow:0 8px 40px #0004;padding:24px}.status{padding:10px;background:#fff7e6;border-radius:9px;font-size:13px}.tiny{font-size:12px;color:#566777}label{display:block;margin:8px 0 4px;font-weight:600;font-size:13px}#feedFile{padding:8px}footer{text-align:center;color:#607084;font-size:12px;padding:15px}@media print{header,.noprint,.fav,.toggle{display:none!important}main{padding:0}.panel{box-shadow:none}.row{break-inside:avoid}} .auditrow{border-top:1px solid #e2eaf1;padding:10px 0;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.auditrow button{padding:7px 10px;font-size:12px}.audittools{display:flex;gap:8px;flex-wrap:wrap}.audittools>*{flex:1;min-width:120px}.audittag{font-size:12px;color:#536578}.auditcounts{font-weight:700;margin:10px 0} .auditcheck{display:flex;align-items:center;gap:8px;margin:9px 0 0;font-size:13px;color:#14633c;font-weight:700}.auditcheck input{width:21px;height:21px;accent-color:#167247;flex:0 0 auto}.statusTag{font-size:11px;font-weight:750;display:inline-block;margin-top:5px;padding:3px 6px;border-radius:5px;background:#e6edf4;color:#284763}.statusTag.offline{background:#fff0d4;color:#8b4b00}.statusTag.verified{background:#dff3e6;color:#166438}.statusTag.excluded{background:#eae9f3;color:#534c73}.statusTag.research{background:#edf1f5;color:#4b5d70}</style><style id="compactPrintStyles">
+#printChannelSheet{display:none}
+@media print{
+@page{size:letter portrait;margin:.38in .42in}
+body{background:white!important;color:#101820!important;font-family:Arial,sans-serif!important}
+body > header,body > main,dialog{display:none!important}
+#printChannelSheet{display:block!important;width:100%;font-family:Arial,sans-serif;color:#111}
+#printChannelSheet .printTop{background:#12518a;color:white;text-align:center;padding:9px 6px;margin-bottom:7px}
+#printChannelSheet .printTop h2{font-size:17px;margin:0;letter-spacing:.5px}
+#printChannelSheet .printTop small{font-size:9px}
+#printChannelSheet .printCols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 12px}
+#printChannelSheet .printCol{min-width:0}
+#printChannelSheet .printLine{display:flex;gap:6px;align-items:baseline;white-space:nowrap;line-height:1.14;font-size:9.2px;font-weight:600;padding:2.1px 1px;border-bottom:1px solid #e8edf2}
+#printChannelSheet .printNum{flex:0 0 34px;font-weight:800}
+#printChannelSheet .printName{overflow:hidden;text-overflow:ellipsis}
+#printChannelSheet .premiumBox{margin-top:8px;border:1px solid #a9b8c9;padding:4px 6px}
+#printChannelSheet .premiumTitle{background:#12518a;color:white;font-size:10px;font-weight:bold;padding:3px 5px;margin:-4px -6px 4px}
+#printChannelSheet .premiumCols{display:grid;grid-template-columns:repeat(2,1fr);column-gap:12px}
+#printChannelSheet .premiumLine{font-size:8.7px;line-height:1.3;white-space:nowrap}
+#printChannelSheet .foot{font-size:8px;color:#444;text-align:center;margin-top:7px}
+}
+.residentControls .toolbar button{min-width:0}.residentControls #adminToggle{flex:0 1 auto;margin-left:auto;font-size:13px;padding:8px 12px}#adminTools[hidden],#adminSections[hidden]{display:none!important}#adminTools h3{margin-top:0}.gridscroll{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}@media(max-width:480px){header{padding:14px 10px}header h1{font-size:21px}main{padding:9px}.panel{padding:11px}.residentControls .toolbar{gap:5px}.residentControls .toolbar button{padding:9px 6px;font-size:13px}} </style></head><body><header><main><h1>📺 Barefoot NT NMB TV Guide</h1><div style="font-size:12px;opacity:.9">Version 3.6 · Resident + Admin pilot</div><p>HTC decimal channels · North Myrtle Beach · HOA pilot</p></main></header><main><section class="panel noprint residentControls"><div class="toolbar"><button class="active" id="now">Now</button><button id="tonight">Tonight</button><button id="favorites">★ Favorites</button><button id="all" class="active">All channels</button></div><label for="search">Find a channel</label><input id="search" placeholder="Search ESPN, 28.1, Hallmark…"><div class="toolbar"><select id="category"><option value="">All categories</option></select><button id="gridView" class="active">▦ Grid</button><button id="listView">☷ List</button></div><div class="toolbar"><button id="adminToggle" type="button" aria-expanded="false" aria-controls="adminTools">⚙ Admin Tools</button></div></section><section class="panel noprint" id="adminTools" hidden><h3>⚙ Admin Tools</h3><p class="tiny">Maintenance and technical settings. These controls are hidden during normal guide browsing; this menu is not password-protected.</p><div class="toolbar"><button id="refresh">↻ Refresh schedules</button><button id="print">Print channel list</button><button id="settings">Schedule data settings</button><button id="auditButton">🔎 Channel audit</button><button id="backupButton">💾 Backup & Restore</button></div><p class="tiny">EPGTalk and local affiliate feed controls are for technical testing. Verify schedule rights before sharing the guide with HOA residents.</p></section><div id="adminSections" hidden><section class="panel noprint" id="localPilot"><h3>📡 Local affiliates · Free XMLTV pilot</h3><p class="tiny">Exact station feeds: 7.1 WFXB (FOX), 10.1 WMBF (NBC), 13.1 WBTW (CBS), 15.1 WPDE (ABC). EPGTalk remains unchanged for other channels. Private technical testing only; feed redistribution permissions are not yet confirmed. This pilot should not be promoted to HOA residents.</p><div class="toolbar"><button id="localAuto" class="primary">↻ Load local schedules now</button><button id="localClear">Clear local feed</button></div><label for="localFile">Or load the downloaded SC.xml.gz file (also accepts .xml)</label><input id="localFile" type="file" accept=".gz,.xml,application/gzip,application/xml,text/xml"><div class="status" id="localStatus" role="status" aria-live="polite">Local feed not loaded. Your existing schedules are unaffected.</div><p class="tiny">On the GitHub Pages HTTPS website, the local feed loads automatically when this page opens. On a downloaded HTML file, use the manual import if needed. The compressed feed is large and may take time to process. Listings are not included in progress backups.</p></section><section class="panel noprint" id="auditPanel" hidden><h3>🔎 Channel audit · Version 3.6</h3><p class="tiny">This report distinguishes resident verification and service status from feed availability. Offline statuses are manually maintained and may change when HTC restores service. A feed match is not proof that its schedule is correct. Check the box when you have personally confirmed a channel’s schedule. Uncheck it if a schedule is wrong. Your checkmarks are saved on this device.</p><div class="audittools"><input id="auditSearch" placeholder="Find channel or network"><select id="auditFilter"><option value="all">All channels</option><option value="unmatched">No feed match</option><option value="no-program">Matched, no current show</option><option value="has-program">Has current show</option><option value="verified">✓ Verified only</option><option value="unverified">Not yet verified</option><option value="not-in-package">Not Included with HOA Package</option><option value="offline">Temporarily Offline (HTC)</option><option value="research">Needs Research</option></select></div><div class="auditcounts" id="auditCounts"></div><div class="toolbar"><button id="auditExport">Export audit CSV</button><button id="auditRefresh">Refresh feed</button></div><div id="auditRows"></div></section><section class="panel noprint" id="backupPanel" hidden><h3>💾 Backup & Restore · Version 3.6</h3><p class="tiny">Save verification checkmarks, favorites, manual feed selections, disabled mappings, HOA exclusions, and offline statuses as a JSON file. Keep this backup somewhere safe before opening a new app version. Schedule listings themselves are not included.</p><div class="status" id="backupStats">Preparing backup summary…</div><div class="toolbar"><button id="exportBackup" class="primary">⬇ Export my progress</button></div><label for="restoreFile">Restore a previous progress backup (.json)</label><input id="restoreFile" type="file" accept=".json,application/json"><p class="tiny">Restoring replaces the current device's saved progress. You will see a summary and a confirmation before anything changes. Only use a backup you exported from this app.</p><div id="restorePreview" class="status" hidden></div><div class="toolbar" id="restoreActions" hidden><button id="confirmRestore" class="primary">Restore this backup</button><button id="cancelRestore">Cancel</button></div><p class="tiny" id="backupMessage" role="status" aria-live="polite"></p></section><section class="panel noprint" id="settingsPanel" hidden><h3>Schedule data · Searchable feeds</h3><p class="tiny">Import an XMLTV (.xml) schedule file supplied by a provider that permits your intended use. Or enter a CORS-enabled XMLTV URL. A public feed may require permission and a hosted proxy. The app automatically connects to EPGTalk public JSON endpoints. You can also import an XMLTV file here.</p><label for="feedFile">Import XMLTV file</label><input type="file" id="feedFile" accept=".xml,.txt,text/xml,application/xml"><label for="feedUrl">XMLTV feed URL (optional)</label><input id="feedUrl" type="url" placeholder="https://example.org/guide.xml"><div class="toolbar"><button id="loadUrl">Load URL</button><button id="clearFeed">Clear schedules</button></div><p class="tiny">XMLTV channels are matched to HTC network names; you can also map unmatched networks manually below. Files are processed locally in your browser and are not uploaded by this app.</p><label for="mappingSearch">Find channel to edit</label><input id="mappingSearch" placeholder="Search 25.1, TNT, ESPN…"><p class="tiny" id="mappingCount"></p><div id="mapping"></div></section></div><section class="panel"><div id="status" class="status">Connecting to EPGTalk schedule…</div><p class="tiny" id="count"></p><p class="tiny">Schedules are estimates and may change. All times Eastern.</p><div id="gridPanel"><p class="tiny">Tap ☆ to save favorites. Swipe sideways for more times. Tap a program for details.</p><div class="toolbar"><button id="primeTime" class="primejump">★ 8 PM Prime Time</button><button id="earlier">← Earlier</button><button id="rightNow">Now</button><button id="later">Later →</button></div><div id="gridTable" class="gridscroll"></div></div><div id="list" hidden></div></section><footer>Unofficial HOA pilot · Not affiliated with HTC or EPGTalk · Verify channel lineup and schedule licensing · v3.6</footer></main><dialog id="programDialog"><h3 id="programTitle"></h3><p id="programInfo"></p><button id="closeProgram">Close</button></dialog><script>const channels=[{"number": "2.1", "name": "TV Scroll Guide", "category": "Local"}, {"number": "2.2", "name": "Channel Guide", "category": "Local"}, {"number": "3.1", "name": "Headline News", "category": "News"}, {"number": "4.1", "name": "HTC", "category": "Local"}, {"number": "5.1", "name": "Freeform", "category": "Entertainment"}, {"number": "6.1", "name": "C-SPAN", "category": "News"}, {"number": "6.2", "name": "NewsNation", "category": "News"}, {"number": "7.1", "name": "FOX (WFXB)", "category": "Local"}, {"number": "7.2", "name": "Start TV", "category": "Entertainment"}, {"number": "7.3", "name": "MeTV", "category": "Entertainment"}, {"number": "7.4", "name": "COZI TV", "category": "Entertainment"}, {"number": "7.5", "name": "True Crime", "category": "Entertainment"}, {"number": "8.1", "name": "PBS SC", "category": "Local"}, {"number": "8.2", "name": "PBS Kids", "category": "Kids"}, {"number": "8.3", "name": "South Carolina Channel", "category": "Local"}, {"number": "8.4", "name": "UNC TV (varies)", "category": "Local"}, {"number": "8.5", "name": "ETV World", "category": "Local"}, {"number": "9.1", "name": "City Channel - Conway", "category": "Local"}, {"number": "9.2", "name": "City Channel - Myrtle Beach", "category": "Local"}, {"number": "9.3", "name": "City Channel - NMB", "category": "Local"}, {"number": "10.1", "name": "NBC (WMBF)", "category": "Local"}, {"number": "10.2", "name": "Bounce TV", "category": "Entertainment"}, {"number": "10.3", "name": "Laff", "category": "Entertainment"}, {"number": "10.4", "name": "Grit TV", "category": "Entertainment"}, {"number": "10.5", "name": "Palmetto Sports", "category": "Sports"}, {"number": "11.1", "name": "QVC", "category": "Shopping"}, {"number": "11.2", "name": "EWTN", "category": "Faith"}, {"number": "12.1", "name": "Horry County Schools", "category": "Local"}, {"number": "13.1", "name": "CBS (WBTW)", "category": "Local"}, {"number": "13.2", "name": "MyNetworkTV", "category": "Local"}, {"number": "13.3", "name": "Escape / ION Mystery", "category": "Entertainment"}, {"number": "14.1", "name": "Horry County Government", "category": "Local"}, {"number": "15.1", "name": "ABC (WPDE)", "category": "Local"}, {"number": "15.2", "name": "WPDE Weather", "category": "Local"}, {"number": "15.3", "name": "Comet TV", "category": "Entertainment"}, {"number": "15.4", "name": "TBD TV / ROAR (varies)", "category": "Entertainment"}, {"number": "16.1", "name": "CW (WWMB)", "category": "Local"}, {"number": "16.2", "name": "Stadium / The Nest (varies)", "category": "Entertainment"}, {"number": "16.3", "name": "DABL", "category": "Entertainment"}, {"number": "17.1", "name": "Grand Strand TV", "category": "Local"}, {"number": "17.2", "name": "Beach TV", "category": "Local"}, {"number": "18.1", "name": "HSN", "category": "Shopping"}, {"number": "20.1", "name": "HBO East (if subscribed)", "category": "Premium"}, {"number": "20.2", "name": "HBO Plus East (if subscribed)", "category": "Premium"}, {"number": "20.3", "name": "HBO Family East (if subscribed)", "category": "Premium"}, {"number": "20.4", "name": "HBO Signature East (if subscribed)", "category": "Premium"}, {"number": "20.5", "name": "HBO Latino East (if subscribed)", "category": "Premium"}, {"number": "21.1", "name": "Showtime (if subscribed)", "category": "Premium"}, {"number": "21.2", "name": "Showcase (if subscribed)", "category": "Premium"}, {"number": "21.3", "name": "Showtime Family (if subscribed)", "category": "Premium"}, {"number": "21.4", "name": "SHO Extreme (if subscribed)", "category": "Premium"}, {"number": "21.5", "name": "The Movie Channel (if subscribed)", "category": "Premium"}, {"number": "22.1", "name": "TBN", "category": "Faith"}, {"number": "22.2", "name": "QVC II", "category": "Shopping"}, {"number": "23.1", "name": "Lifetime", "category": "Entertainment"}, {"number": "24.1", "name": "HGTV", "category": "Lifestyle"}, {"number": "24.2", "name": "Hallmark", "category": "Movies"}, {"number": "24.3", "name": "Hallmark Mystery", "category": "Movies"}, {"number": "25.1", "name": "TNT", "category": "Entertainment"}, {"number": "26.1", "name": "CNN", "category": "News"}, {"number": "27.1", "name": "USA", "category": "Entertainment"}, {"number": "28.1", "name": "ESPN", "category": "Sports"}, {"number": "29.1", "name": "ESPN2", "category": "Sports"}, {"number": "30.1", "name": "Lifetime Movies", "category": "Movies"}, {"number": "30.2", "name": "SEC Network", "category": "Sports"}, {"number": "31.1", "name": "Discovery Channel", "category": "Documentary"}, {"number": "31.2", "name": "Investigation Discovery", "category": "Documentary"}, {"number": "32.1", "name": "VH1", "category": "Entertainment"}, {"number": "33.1", "name": "BET", "category": "Entertainment"}, {"number": "34.1", "name": "Comedy Central", "category": "Entertainment"}, {"number": "35.1", "name": "MTV", "category": "Entertainment"}, {"number": "36.1", "name": "Weather Channel - Conway", "category": "News"}, {"number": "36.2", "name": "Weather Channel - MB", "category": "News"}, {"number": "37.1", "name": "Disney Channel", "category": "Kids"}, {"number": "38.1", "name": "TLC", "category": "Lifestyle"}, {"number": "39.1", "name": "ION", "category": "Entertainment"}, {"number": "39.2", "name": "POP TV", "category": "Entertainment"}, {"number": "40.1", "name": "Syfy", "category": "Entertainment"}, {"number": "41.1", "name": "Cartoon Network", "category": "Kids"}, {"number": "41.2", "name": "Oxygen", "category": "Entertainment"}, {"number": "41.3", "name": "FOX Weather", "category": "News"}, {"number": "42.1", "name": "CNBC", "category": "News"}, {"number": "42.2", "name": "MSNBC / MS NOW", "category": "News"}, {"number": "43.1", "name": "A&E", "category": "Entertainment"}, {"number": "44.1", "name": "CMT", "category": "Entertainment"}, {"number": "44.2", "name": "ACC Network", "category": "Sports"}, {"number": "45.1", "name": "TCM", "category": "Movies"}, {"number": "46.1", "name": "AMC", "category": "Movies"}, {"number": "46.2", "name": "WE TV", "category": "Entertainment"}, {"number": "46.3", "name": "BBC America", "category": "Entertainment"}, {"number": "47.1", "name": "TBS", "category": "Entertainment"}, {"number": "49.2", "name": "Tennis Channel", "category": "Sports"}, {"number": "50.1", "name": "E!", "category": "Entertainment"}, {"number": "51.1", "name": "History", "category": "Documentary"}, {"number": "52.1", "name": "Golf Channel", "category": "Sports"}, {"number": "52.2", "name": "CBS Sports Network", "category": "Sports"}, {"number": "52.3", "name": "MLB Network", "category": "Sports"}, {"number": "53.1", "name": "Nickelodeon", "category": "Kids"}, {"number": "54.1", "name": "TV Land", "category": "Entertainment"}, {"number": "55.1", "name": "FOX Sports 1", "category": "Sports"}, {"number": "56.1", "name": "truTV", "category": "Entertainment"}, {"number": "57.1", "name": "Animal Planet", "category": "Documentary"}, {"number": "57.2", "name": "Jewelry TV", "category": "Shopping"}, {"number": "58.1", "name": "Travel Channel", "category": "Lifestyle"}, {"number": "59.1", "name": "OWN", "category": "Entertainment"}, {"number": "60.1", "name": "FX", "category": "Entertainment"}, {"number": "60.2", "name": "FXX", "category": "Entertainment"}, {"number": "61.1", "name": "FOX News", "category": "News"}, {"number": "61.2", "name": "FOX Business", "category": "News"}, {"number": "62.1", "name": "Food Network", "category": "Lifestyle"}, {"number": "63.1", "name": "Paramount", "category": "Entertainment"}, {"number": "64.1", "name": "National Geographic", "category": "Documentary"}, {"number": "65.1", "name": "Bravo", "category": "Entertainment"}];
+const seedProgress={"format":"myrtle-beach-tv-guide-progress","schemaVersion":1,"appVersion":"3.0","exportedAt":"2026-11-12T20:20:43Z","verifiedChannels":["3.1","5.1","6.1","6.2","7.3","7.4","8.2","10.2","10.3","10.4","11.1","11.2","13.3","18.1","22.1","22.2","23.1","24.1","24.2","24.3","25.1","26.1","27.1","28.1","29.1","30.1","30.2","31.1","32.1","33.1","34.1","35.1","37.1","38.1","39.1","39.2","40.1","41.1","41.2","41.3","42.1","42.2","43.1","44.1","44.2","45.1","46.1","46.2","46.3","47.1","49.2","50.1","51.1","52.1","52.2","52.3","53.1","54.1","55.1","56.1","57.1","57.2","58.1","59.1","60.1","60.2","61.1","61.2","62.1","63.1","64.1","65.1"],"favorites":["10.3","28.1","29.1","31.1","51.1","54.1","58.1","61.1"],"manualMap":{"28.1":"epg:espn us","31.1":"epg:discovery channel us","26.1":"epg:cnn us","29.1":"epg:espn 2 us","62.1":"epg:food network","5.1":"epg:freeform","6.1":"epg:c-span","6.2":"epg:newsnation","7.3":"epg:me tv","7.4":"epg:cozi tv","8.2":"epg:pbs kids","10.3":"epg:laff","11.1":"epg:qvc","15.3":"epg:comet tv","18.1":"epg:hsn","20.1":"epg:hbo east","23.1":"epg:lifetime","24.2":"epg:hallmark channel","24.3":"epg:hallmark mystery","27.1":"epg:usa network","30.2":"epg:sec network","32.1":"epg:vh1","33.1":"epg:bet","34.1":"epg:comedy central","35.1":"epg:mtv","38.1":"epg:tlc","39.2":"epg:pop tv","40.1":"epg:syfy","41.3":"epg:fox weather","42.1":"epg:cnbc","43.1":"epg:a&e","44.1":"epg:cmt","44.2":"epg:acc network","46.2":"epg:we tv","46.3":"epg:bbc america","47.1":"epg:tbs","49.2":"epg:tennis channel","50.1":"epg:e!","51.1":"epg:history","52.1":"epg:golf channel","52.2":"epg:cbs sports network","52.3":"epg:mlb network","55.1":"epg:fox sports 1 us","56.1":"epg:tru tv","57.1":"epg:animal planet","58.1":"epg:travel channel","59.1":"epg:own","60.1":"epg:fx","60.2":"epg:fxx","61.1":"epg:fox news channel","61.2":"epg:fox business","64.1":"epg:national geographic","65.1":"epg:bravo","10.2":"epg:bounce","10.4":"epg:grit","11.2":"epg:eternal word television network","13.3":"epg:ion mystery","15.4":"epg:tbd","22.1":"epg:trinity broadcasting network hd","22.2":"epg:qvc2 (qvc)","30.1":"epg:lifetime movie network","37.1":"epg:disney channel east","39.1":"epg:ion television","41.1":"epg:cartoon network","41.2":"epg:oxygen true crime","45.1":"epg:tcm us","46.1":"epg:amc east","53.1":"epg:nickelodeon east","54.1":"epg:tv land","57.2":"epg:jewelry television","63.1":"epg:paramount network","24.1":"epg:hgtv east"},"disabledMap":["7.5"],"excludedChannels":["20.1","20.2","20.3","20.4","20.5","21.1","21.2","21.3","21.4","21.5"]};
+const $=id=>document.getElementById(id);const localFeedIDs={},localPrograms=[];const localNames={'7.1':'WFXB-DT','10.1':'WMBF-DT','13.1':'WBTW-DT','15.1':'WPDE-DT'};let mode='now',onlyFavorites=false,feedChannels=[],programs=[],expanded=new Set(),manualMap={};let favorites=new Set(seedProgress.favorites);let disabledMap=new Set(seedProgress.disabledMap);let feedState="Connecting to EPGTalk…";let lastUpdated="";try{favorites=new Set(JSON.parse(localStorage.getItem('mbtv-favorites')||JSON.stringify(seedProgress.favorites)));manualMap=JSON.parse(localStorage.getItem('mbtv-mapping')||JSON.stringify(seedProgress.manualMap));disabledMap=new Set(JSON.parse(localStorage.getItem('mbtv-disabled-mapping')||JSON.stringify(seedProgress.disabledMap)))}catch(e){};
+const cats=[...new Set(channels.map(x=>x.category))].sort();cats.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;$('category').append(o)});
+function norm(s){return String(s||'').toLowerCase().replace(/\(.*?\)/g,'').replace(/[^a-z0-9]/g,'')};
+const aliases={'NBC (WMBF)':['wmbf','nbc wmbf'],'CBS (WBTW)':['wbtw','cbs wbtw'],'ABC (WPDE)':['wpde','abc wpde'],'FOX (WFXB)':['wfxb','fox wfxb'],'ESPN':['espn'],'ESPN2':['espn2'],'Discovery Channel':['discovery','discoverychannel'],'Hallmark':['hallmarkchannel','hallmark'],'MSNBC / MS NOW':['msnow','msnbc']};
+function feedMatch(c){if(localFeedIDs[c.number]&&localPrograms.some(p=>p.id===localFeedIDs[c.number]))return localFeedIDs[c.number];if(disabledMap.has(c.number))return null;if(c.number==='25.1'&&!manualMap[c.number]){const exact=feedChannels.filter(f=>norm(f.names[0])===norm('TNT'));return exact.length===1?exact[0].id:null;}if(manualMap[c.number]&&feedChannels.some(f=>f.id===manualMap[c.number]))return manualMap[c.number];let terms=[c.name,...(aliases[c.name]||[])].map(norm);let matches=feedChannels.filter(f=>f.names.some(n=>terms.includes(norm(n))));return matches.length===1?matches[0].id:null}
+function parseTime(s){if(!s)return NaN;let m=s.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})?\s*([+-]\d{4})?/);if(!m)return Date.parse(s);let iso=m[1]+'-'+m[2]+'-'+m[3]+'T'+m[4]+':'+m[5]+':'+(m[6]||'00');let off=m[7];return Date.parse(iso+(off?off.slice(0,3)+':'+off.slice(3):'Z'))}
+function loadXML(t){let d=new DOMParser().parseFromString(t,'application/xml');if(d.querySelector('parsererror'))throw Error('Invalid XMLTV document');let fs=[...d.getElementsByTagName('channel')].map(c=>({id:c.getAttribute('id'),names:[...c.getElementsByTagName('display-name')].map(x=>x.textContent.trim())}));let ps=[...d.getElementsByTagName('programme')].map(p=>({id:p.getAttribute('channel'),start:parseTime(p.getAttribute('start')),end:parseTime(p.getAttribute('stop')),title:p.getElementsByTagName('title')[0]?.textContent||'Untitled program',desc:p.getElementsByTagName('desc')[0]?.textContent||''})).filter(p=>Number.isFinite(p.start)&&Number.isFinite(p.end));if(!fs.length||!ps.length)throw Error('No usable channels or programs in XMLTV feed');feedChannels=fs;programs=ps;mainProgramIndex=indexPrograms(programs);
+   // Verified HOA mapping, selected by resident and confirmed against ESPN broadcast.
+   const espn=fs.filter(f=>norm(f.names[0])===norm('ESPN US'));
+   if(espn.length===1&&!disabledMap.has('28.1')&&!manualMap['28.1'])manualMap['28.1']=espn[0].id;
+   // HOA-tested channels: prefer existing resident mappings, then select an exact, unambiguous feed name.
+   for(const [num,names] of [['31.1',['Discovery Channel US','Discovery US','Discovery Channel']],['24.1',['HGTV US','HGTV USA - Eastern Feed','HGTV']],['26.1',['CNN US','CNN']],['29.1',['ESPN2 US','ESPN2']],['62.1',['Food Network US','Food Network']]]) {
+     if(disabledMap.has(num)||num==='25.1'||(manualMap[num] && fs.some(f=>f.id===manualMap[num])))continue;
+     for(const name of names){const hit=fs.filter(f=>norm(f.names[0])===norm(name));if(hit.length===1){manualMap[num]=hit[0].id;break;}}
+   }renderMapping();render()}
+function dayWindow(){let now=new Date();if(mode==='now')return [Date.now(),Date.now()+4*3600000];let d=new Date(now);d.setHours(18,0,0,0);return [d.getTime(),d.getTime()+6*3600000]}
+function time(t){return new Date(t).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'})}
+let mainProgramIndex=new Map(),localProgramIndex=new Map();
+function indexPrograms(source){const m=new Map();for(const p of source){if(!m.has(p.id))m.set(p.id,[]);m.get(p.id).push(p)}for(const v of m.values())v.sort((a,b)=>a.start-b.start);return m}
+function schedule(c){let id=feedMatch(c),[a,b]=dayWindow();const idx=localFeedIDs[c.number]===id?localProgramIndex:mainProgramIndex;return (idx.get(id)||[]).filter(p=>p.start<b&&p.end>a)}
+function make(tag,cls,txt){let e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
+function render(){if(!$('auditPanel').hidden)renderAudit();let q=$('search').value.trim().toLowerCase(),cat=$('category').value;let items=channels.filter(c=>(!cat||cat===c.category)&&(!onlyFavorites||favorites.has(c.number))&&(!q||(c.number+' '+c.name).toLowerCase().includes(q)));items.sort((a,b)=>Number(a.number)-Number(b.number));$('count').textContent=items.length+' of '+channels.length+' HTC channels · Times Eastern';let root=$('list');if(viewMode==='list')root.replaceChildren();let mapped=channels.filter(c=>feedMatch(c)).length;if(viewMode==='grid')renderGrid();$('status').textContent=programs.length?`Loaded ${programs.length} program entries. Matched ${mapped} of ${channels.length} HTC channels. ${lastUpdated ? 'Checked '+lastUpdated+'. ' : ''}Unmatched channels show schedule unavailable.`:feedState;if(viewMode!=='list')return;items.forEach(c=>{let r=make('div','row'),n=make('div','num',c.number),info=make('div');info.append(make('div','name',c.name),make('div','muted',c.category));info.append(statusTag(c)); let ps=(excludedChannels.has(c.number)||offlineChannels.has(c.number))?[]:schedule(c);info.append(make('div','program',excludedChannels.has(c.number)?'Not Included with HOA Package':offlineChannels.has(c.number)?statusLabel('offline'):ps.length?(mode==='now'?(ps.find(p=>p.start<=Date.now()&&p.end>Date.now())?.title||'Upcoming: '+ps[0].title):ps[0].title):(feedMatch(c)?'No current listings in feed':'Schedule unavailable — no channel match')));if(mode==='now'&&ps.length){let next=ps.find(p=>p.start>Date.now());if(next)info.append(make('div','muted','Next: '+time(next.start)+' · '+next.title));}let side=make('div');let star=make('button','fav',favorites.has(c.number)?'★':'☆');star.setAttribute('aria-label','Favorite '+c.name);star.onclick=()=>{favorites.has(c.number)?favorites.delete(c.number):favorites.add(c.number);try{localStorage.setItem('mbtv-favorites',JSON.stringify([...favorites]))}catch(e){}render()};let btn=make('button','toggle',expanded.has(c.number)?'Hide':'Full guide');btn.style.fontSize='12px';btn.onclick=()=>{expanded.has(c.number)?expanded.delete(c.number):expanded.add(c.number);render()};side.append(star,btn);r.append(n,info,side);if(expanded.has(c.number)){let box=make('div','schedule');box.append(make('div','name',mode==='now'?'Now & next':'Tonight'));if(!ps.length)box.append(make('p','tiny','No verified listings for this channel and period.'));ps.forEach(p=>box.append(make('div','slot',time(p.start)+'–'+time(p.end)+'  '+p.title)));r.append(box)}root.append(r)})}
+
+let viewMode='grid';
+let gridOffset=0;
+function updatePrimeButton(){const btn=$('primeTime');btn.classList.toggle('active',mode==='tonight'&&gridOffset===4);btn.setAttribute('aria-pressed',String(mode==='tonight'&&gridOffset===4));}
+function renderGrid(){
+ updatePrimeButton();
+ const root=$('gridTable');root.replaceChildren();
+ const q=$('search').value.trim().toLowerCase(),cat=$('category').value;
+ const items=channels.filter(c=>(!cat||cat===c.category)&&(!onlyFavorites||favorites.has(c.number))&&(!q||(c.number+' '+c.name).toLowerCase().includes(q)));
+ const [a,b]=dayWindow(),start=Math.floor((a+gridOffset*1800000)/1800000)*1800000;
+ items.sort((a,b)=>Number(a.number)-Number(b.number));
+ const grid=make('div','guidegrid');
+ const headerRow=make('div','gridrow gridheader');
+ headerRow.append(make('div','gcell ghead gcorner','Channel'));
+ for(let k=0;k<8;k++)headerRow.append(make('div','gcell ghead',time(start+k*1800000)));
+ grid.append(headerRow);
+ for(const c of items){
+   const gridRow=make('div','gridrow');
+   const channelCell=make('div','gcell gchannel');
+   const star=make('button','gridstar',favorites.has(c.number)?'★':'☆');
+   star.type='button';star.setAttribute('aria-label',(favorites.has(c.number)?'Remove ':'Add ')+c.name+(favorites.has(c.number)?' from':' to')+' favorites');
+   star.setAttribute('aria-pressed',String(favorites.has(c.number)));
+   star.onclick=()=>{const x=root.scrollLeft,y=root.scrollTop;if(favorites.has(c.number))favorites.delete(c.number);else favorites.add(c.number);try{localStorage.setItem('mbtv-favorites',JSON.stringify([...favorites]))}catch(e){}render();root.scrollLeft=x;root.scrollTop=y};
+   channelCell.title=statusLabel(channelStatus(c));channelCell.append(star,make('span','chlabel',c.number+' · '+c.name));gridRow.append(channelCell);
+   const ps=(excludedChannels.has(c.number)||offlineChannels.has(c.number))?[]:schedule(c);
+   for(let k=0;k<8;k++){
+     const t=start+k*1800000, end=t+1800000;
+     const p=ps.find(p=>p.start<end&&p.end>t);
+     const cell=make('div','gcell');
+     if(excludedChannels.has(c.number)){cell.append(make('span','muted','Not Included with HOA Package'));}
+     else if(offlineChannels.has(c.number)){cell.append(make('span','muted','HTC temporarily offline'));}
+      else if(p){let div=make('button','gprog',p.title);div.style.width='100%';div.style.textAlign='left';div.title=time(p.start)+'–'+time(p.end)+' '+p.title;div.onclick=()=>showProgram(c,p);cell.append(div)}
+     else cell.append(make('span','muted',feedMatch(c)?'No listing':'Schedule unavailable'));
+     if(t<=Date.now()&&end>Date.now())cell.classList.add('currentTime');
+     gridRow.append(cell);
+   }
+   grid.append(gridRow);
+ }
+ root.append(grid);
+}
+function switchView(v){viewMode=v;$('listView').classList.toggle('active',v==='list');$('gridView').classList.toggle('active',v==='grid');$('gridPanel').hidden=v!=='grid';$('list').hidden=v==='grid';render()}
+$('earlier').onclick=()=>{gridOffset-=4;render()};$('later').onclick=()=>{gridOffset+=4;render()};$('rightNow').onclick=()=>{mode='now';gridOffset=0;['now','tonight'].forEach(x=>$(x).classList.toggle('active',x===mode));render()};$('primeTime').onclick=()=>{mode='tonight';gridOffset=4;['now','tonight'].forEach(x=>$(x).classList.toggle('active',x===mode));render();$('gridTable').scrollLeft=0};
+function showProgram(c,p){$('programTitle').textContent=p.title;$('programInfo').textContent=c.number+' · '+c.name+' | '+new Date(p.start).toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',hour:'numeric',minute:'2-digit'})+' – '+time(p.end)+' ET';$('programDialog').showModal()}
+$('closeProgram').onclick=()=>$('programDialog').close();
+$('listView').onclick=()=>switchView('list');$('gridView').onclick=()=>switchView('grid');
+
+function renderMapping(){
+ if($('settingsPanel').hidden)return;
+ let root=$('mapping');root.replaceChildren();
+ if(!feedChannels.length){$('mappingCount').textContent='Load schedules to edit mappings.';return;}
+ let q=($('mappingSearch').value||'').trim().toLowerCase();
+ let opts=feedChannels.slice().sort((a,b)=>(a.names[0]||'').localeCompare(b.names[0]||''));
+ let shown=channels.filter(c=>(c.number+' '+c.name).toLowerCase().includes(q));
+ $('mappingCount').textContent=shown.length+' of '+channels.length+' HTC channels shown. Search the available feeds below each channel.';
+ shown.forEach(c=>{
+  let label=make('label','',c.number+' · '+c.name);
+  let finder=make('input');finder.type='search';finder.placeholder='Search feed names (e.g. Investigation Discovery)';
+  finder.setAttribute('aria-label','Search available feeds for '+c.number+' '+c.name);
+  finder.autocomplete='off';finder.style.margin='5px 0';
+  let sel=make('select');sel.setAttribute('aria-label','Feed for '+c.number+' '+c.name);
+  let current=feedMatch(c)||'';
+  let note=make('div','tiny',current?'Current feed: '+(opts.find(f=>f.id===current)?.names[0]||current):'Currently unmatched');
+  if(c.number==='25.1'&&verifiedChannels.has('25.1'))note.textContent+=' · ✓ HOA confirmed feed named TNT';
+  let results=make('div','tiny');
+  function fill(){
+   let term=finder.value.trim().toLowerCase();
+   let matches=term?opts.filter(f=>f.names.some(n=>n.toLowerCase().includes(term))||f.id.toLowerCase().includes(term)):opts;
+   sel.replaceChildren();
+   let empty=make('option','', 'No match / disable schedule');empty.value='';sel.append(empty);
+   let selected=opts.find(f=>f.id===current);
+   if(selected&&term&&!matches.some(f=>f.id===current)){
+    let keep=make('option','', 'CURRENT: '+(selected.names[0]||selected.id));keep.value=selected.id;sel.append(keep);
+   }
+   matches.forEach(f=>{let o=make('option','',f.names[0]||f.id);o.value=f.id;sel.append(o)});
+   sel.value=current;
+   results.textContent=term?matches.length+' matching feeds (current selection retained)':'Showing all '+opts.length+' feeds';
+  }
+  finder.oninput=fill;fill();
+  sel.onchange=()=>{
+   if(sel.value){manualMap[c.number]=sel.value;disabledMap.delete(c.number)}
+   else{delete manualMap[c.number];disabledMap.add(c.number)}
+   saveMappings();renderMapping();render();
+  };
+  root.append(label,finder,sel,results,note);
+ });
+}
+function saveMappings(){try{localStorage.setItem('mbtv-mapping',JSON.stringify(manualMap));localStorage.setItem('mbtv-disabled-mapping',JSON.stringify([...disabledMap]))}catch(e){}}
+const initialVerified=['24.1','25.1','26.1','28.1','29.1','31.1','62.1'];
+let savedVerified=null;
+try{savedVerified=JSON.parse(localStorage.getItem('mbtv-verified-v2'));}catch(e){}
+const verifiedChannels=new Set(Array.isArray(savedVerified)?savedVerified:seedProgress.verifiedChannels);
+// One-time upgrade: incorporate resident-confirmed checks made during the v2.9 review.
+// Existing favorites, mappings, exclusions, and outage statuses remain untouched.
+try{
+ if(localStorage.getItem('mbtv-v30-verification-upgrade')!=='complete'){
+  ['41.3','11.2','5.1','6.1','6.2','3.1'].forEach(n=>verifiedChannels.add(n));
+  localStorage.setItem('mbtv-verified-v2',JSON.stringify([...verifiedChannels]));
+  localStorage.setItem('mbtv-v30-verification-upgrade','complete');
+ }
+}catch(e){}
+// HBO (20.1–20.5) and Showtime family (21.1–21.5) are not part of this HOA package.
+const defaultExcluded=['20.1','20.2','20.3','20.4','20.5','21.1','21.2','21.3','21.4','21.5'];
+let savedExcluded=null;
+try{savedExcluded=JSON.parse(localStorage.getItem('mbtv-hoa-excluded'));}catch(e){}
+const excludedChannels=new Set(Array.isArray(savedExcluded)?savedExcluded.filter(n=>channels.some(c=>c.number===n)):seedProgress.excludedChannels);
+function saveExcluded(){try{localStorage.setItem('mbtv-hoa-excluded',JSON.stringify([...excludedChannels]));}catch(e){}}
+
+function saveVerified(){try{localStorage.setItem('mbtv-verified-v2',JSON.stringify([...verifiedChannels]));}catch(e){}}
+// HTC-reported temporary outages; persisted independently from schedule verification.
+const defaultOffline=['15.3','15.4','16.1','16.2','16.3'];
+let storedOffline=null;
+try{storedOffline=JSON.parse(localStorage.getItem('mbtv-offline-v29'));}catch(e){}
+const offlineChannels=new Set(Array.isArray(storedOffline)?storedOffline.filter(n=>channels.some(c=>c.number===n)):defaultOffline);
+function saveOffline(){try{localStorage.setItem('mbtv-offline-v29',JSON.stringify([...offlineChannels]))}catch(e){}}
+function channelStatus(c){if(excludedChannels.has(c.number))return 'not-in-package';if(offlineChannels.has(c.number))return 'offline';if(verifiedChannels.has(c.number))return 'verified';return 'research'}
+function statusLabel(s){return {'not-in-package':'Not Included with HOA Package','offline':'Temporarily Offline — HTC working on restoration','verified':'✓ Schedule Verified','research':'Needs Research — schedule not yet confirmed'}[s]||s}
+function statusTag(c){const s=channelStatus(c);return make('span','statusTag '+({'not-in-package':'excluded'}[s]||s),statusLabel(s))}
+
+
+function auditData(){const now=Date.now();return channels.map(c=>{const id=feedMatch(c),f=feedChannels.find(x=>x.id===id);const live=id?programs.find(p=>p.id===id&&p.start<=now&&p.end>now):null;const upcoming=id?programs.some(p=>p.id===id&&p.start>now&&p.start<now+86400000):false;return {c,id,feed:f?.names[0]||'',live,upcoming,status:excludedChannels.has(c.number)?'not-in-package':offlineChannels.has(c.number)?'offline':!id?'unmatched':!live?'no-program':'has-program'};});}
+function renderAudit(){const data=auditData(),counts={unmatched:0,'no-program':0,'has-program':0,'not-in-package':0,offline:0};data.forEach(d=>counts[d.status]++);$('auditCounts').textContent=`${data.length} channels · ${counts['has-program']} showing now · ${counts['no-program']} matched without a current show · ${counts.unmatched} unmatched · ${counts['not-in-package']} not in HOA package · ${counts.offline} offline · ${verifiedChannels.size} verified · ${channels.filter(c=>channelStatus(c)==='research').length} need research`;
+ const q=$('auditSearch').value.toLowerCase().trim(),filter=$('auditFilter').value;const root=$('auditRows');root.replaceChildren();
+ data.filter(d=>(filter==='all'||(filter==='verified'?verifiedChannels.has(d.c.number):filter==='unverified'?!verifiedChannels.has(d.c.number):filter==='research'?channelStatus(d.c)==='research':d.status===filter))&&(!q||(d.c.number+' '+d.c.name+' '+d.feed).toLowerCase().includes(q))).forEach(d=>{const row=make('div','auditrow'),info=make('div');info.append(make('div','name',d.c.number+' · '+d.c.name));const label=d.status==='offline'?statusLabel('offline'):d.status==='not-in-package'?'Not Included with HOA Package':d.status==='unmatched'?'No feed match':d.status==='no-program'?'Feed matched; no current show':'Now: '+d.live.title;info.append(statusTag(d.c),make('div','audittag',label+(d.feed?' · Feed: '+d.feed:'')));const checkLabel=make('label','auditcheck');const check=make('input');check.type='checkbox';check.checked=verifiedChannels.has(d.c.number);check.setAttribute('aria-label','Schedule verified for '+d.c.number+' '+d.c.name);check.onchange=()=>{if(check.checked){verifiedChannels.add(d.c.number);offlineChannels.delete(d.c.number);saveOffline()}else verifiedChannels.delete(d.c.number);saveVerified();renderAudit();};checkLabel.append(check,document.createTextNode(' ✓ Schedule verified'));info.append(checkLabel);
+ const packageLabel=make('label','auditcheck');const packageCheck=make('input');packageCheck.type='checkbox';packageCheck.checked=excludedChannels.has(d.c.number);packageCheck.setAttribute('aria-label','Not included with HOA package: '+d.c.number+' '+d.c.name);
+ packageCheck.onchange=()=>{if(packageCheck.checked){excludedChannels.add(d.c.number);verifiedChannels.delete(d.c.number);offlineChannels.delete(d.c.number);saveOffline();saveVerified();}else excludedChannels.delete(d.c.number);saveExcluded();renderAudit();render();};
+ packageLabel.append(packageCheck,document.createTextNode(' Not Included with HOA Package'));info.append(packageLabel);
+  const offlineLabel=make('label','auditcheck');offlineLabel.style.color='#8b4b00';const offlineCheck=make('input');offlineCheck.type='checkbox';offlineCheck.checked=offlineChannels.has(d.c.number);offlineCheck.setAttribute('aria-label','HTC temporarily offline: '+d.c.number+' '+d.c.name);offlineCheck.onchange=()=>{if(offlineCheck.checked){offlineChannels.add(d.c.number);verifiedChannels.delete(d.c.number);excludedChannels.delete(d.c.number)}else offlineChannels.delete(d.c.number);saveOffline();saveVerified();saveExcluded();renderAudit();render()};offlineLabel.append(offlineCheck,document.createTextNode(' Temporarily Offline — HTC'));info.append(offlineLabel);
+ const edit=make('button','', 'Edit feed');edit.onclick=()=>{$('settingsPanel').hidden=false;$('mappingSearch').value=d.c.number;renderMapping();$('settingsPanel').scrollIntoView({behavior:'smooth'});};row.append(info,edit);root.append(row);});}
+$('auditButton').onclick=()=>{$('auditPanel').hidden=!$('auditPanel').hidden;if(!$('auditPanel').hidden){renderAudit();$('auditPanel').scrollIntoView({behavior:'smooth'});}};
+$('auditSearch').oninput=renderAudit;$('auditFilter').onchange=renderAudit;$('auditRefresh').onclick=()=>refreshLive();
+$('auditExport').onclick=()=>{const esc=x=>'"'+String(x??'').replace(/"/g,'""')+'"';const rows=[['HTC channel','Network','Feed','Status','HOA tested','Not Included with HOA Package','HTC Offline','Review Status'],...auditData().map(d=>[d.c.number,d.c.name,d.feed,d.status,verifiedChannels.has(d.c.number)?'Yes':'No',excludedChannels.has(d.c.number)?'Yes':'No',offlineChannels.has(d.c.number)?'Yes':'No',statusLabel(channelStatus(d.c))])];const csv=rows.map(r=>r.map(esc).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='HTC_channel_audit_v3_0.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('mappingSearch').oninput=renderMapping;
+['now','tonight'].forEach(id=>$(id).onclick=()=>{mode=id;gridOffset=0;['now','tonight'].forEach(x=>$(x).classList.toggle('active',x===id));render()});$('search').oninput=render;$('category').onchange=render;$('all').onclick=()=>{onlyFavorites=false;$('all').classList.add('active');$('favorites').classList.remove('active');render()};$('favorites').onclick=()=>{onlyFavorites=true;$('favorites').classList.add('active');$('all').classList.remove('active');render()};$('print').onclick=()=>{buildPrintList();window.print()};$('settings').onclick=()=>{$('settingsPanel').hidden=!$('settingsPanel').hidden;if(!$('settingsPanel').hidden)renderMapping()};$('feedFile').onchange=async e=>{try{loadXML(await e.target.files[0].text())}catch(err){alert('Could not import: '+err.message)}};$('loadUrl').onclick=async()=>{try{let url=$('feedUrl').value;if(!/^https:\/\//.test(url))throw Error('Use an HTTPS XMLTV URL');let r=await fetch(url);if(!r.ok)throw Error('HTTP '+r.status);loadXML(await r.text())}catch(e){alert('Could not load feed: '+e.message+' (The provider may block browser requests.)')}};$('clearFeed').onclick=()=>{feedChannels=[];programs=[];mainProgramIndex=new Map();renderMapping();render()};render();
+// EPGTalk publishes public CORS-enabled JSON. No external navigation or API key.
+const EPG_URLS=['https://epgtalk.com/api/now/us.json','https://epgtalk.com/api/now/uslocal.json','https://epgtalk.com/api/now/combined.json'];
+const exactAliases={
+ 'ESPN':['ESPN US','ESPN'], 'ESPN2':['ESPN2 US','ESPN2'],
+ 'Discovery Channel':['Discovery Channel US','Discovery US','Discovery Channel'],
+ 'Hallmark':['Hallmark Channel US','Hallmark Channel'],
+ 'Hallmark Mystery':['Hallmark Mystery US','Hallmark Mystery'],
+ 'HGTV':['HGTV US','HGTV USA - Eastern Feed','HGTV'], 'TNT':['TNT'],
+ 'CNN':['CNN US','CNN'], 'USA':['USA Network US','USA Network'],
+ 'TLC':['TLC US','TLC'], 'AMC':['AMC US','AMC'],
+ 'Food Network':['Food Network US','Food Network'],
+ 'History':['History Channel US','History Channel','History'],
+ 'Animal Planet':['Animal Planet US','Animal Planet'],
+ 'FOX News':['Fox News Channel US','Fox News Channel'],
+ 'FOX Sports 1':['FS1 US','Fox Sports 1 US','FS1'],
+ 'CBS (WBTW)':['WBTW','WBTW CBS Myrtle Beach'],
+ 'NBC (WMBF)':['WMBF','WMBF NBC Myrtle Beach'],
+ 'ABC (WPDE)':['WPDE','WPDE ABC Myrtle Beach'],
+ 'FOX (WFXB)':['WFXB','WFXB Fox Myrtle Beach']
+};
+async function refreshLive(){
+ feedState='Loading EPGTalk schedules…';render();
+ try{
+  const results=await Promise.allSettled(EPG_URLS.map(async u=>{
+   const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),16000);
+   try{let r=await fetch(u,{signal:controller.signal,cache:'no-cache'});if(!r.ok)throw Error('HTTP '+r.status);return await r.json()}finally{clearTimeout(timer)}
+  }));
+  const data=results.filter(r=>r.status==='fulfilled').map(r=>r.value);
+  if(!data.length)throw Error('Could not reach EPGTalk from this browser');
+  let fs=[],ps=[];const used=new Set();
+  for(const j of data){for(const ch of (j.channels||[])){
+    let nm=String(ch.name||'').trim();if(!nm)continue;
+    let id='epg:'+nm.toLowerCase();if(!used.has(id)){fs.push({id,names:[nm]});used.add(id)}
+    for(const p of (ch.programmes||[])){
+      let a=Number(p.start)*1000,b=Number(p.stop)*1000;
+      if(Number.isFinite(a)&&Number.isFinite(b)&&b>a)ps.push({id,start:a,end:b,title:String(p.title||'Untitled program'),desc:String(p.subtitle||'')});
+    }
+  }}
+  if(!fs.length||!ps.length)throw Error('Feed contains no usable program listings');
+  feedChannels=fs;programs=ps;mainProgramIndex=indexPrograms(programs);
+   // Verified HOA mapping, selected by resident and confirmed against ESPN broadcast.
+   const espn=fs.filter(f=>norm(f.names[0])===norm('ESPN US'));
+   if(espn.length===1&&!disabledMap.has('28.1')&&!manualMap['28.1'])manualMap['28.1']=espn[0].id;
+   // HOA-tested channels: prefer existing resident mappings, then select an exact, unambiguous feed name.
+   for(const [num,names] of [['31.1',['Discovery Channel US','Discovery US','Discovery Channel']],['24.1',['HGTV US','HGTV USA - Eastern Feed','HGTV']],['26.1',['CNN US','CNN']],['29.1',['ESPN2 US','ESPN2']],['62.1',['Food Network US','Food Network']]]) {
+     if(disabledMap.has(num)||num==='25.1'||(manualMap[num] && fs.some(f=>f.id===manualMap[num])))continue;
+     for(const name of names){const hit=fs.filter(f=>norm(f.names[0])===norm(name));if(hit.length===1){manualMap[num]=hit[0].id;break;}}
+   }
+  // Only automatically match exact network names or explicitly curated aliases.
+  // Avoid misleading matches between local affiliates and national networks.
+  for(const c of channels){if(manualMap[c.number]||disabledMap.has(c.number)||c.number==='25.1')continue;
+   const aliases=exactAliases[c.name]||[c.name];
+   let hits=fs.filter(f=>aliases.some(a=>norm(a)===norm(f.names[0])));
+   if(c.number==='28.1'){const verified=fs.filter(f=>norm(f.names[0])===norm('ESPN US'));if(verified.length===1)hits=verified;}
+    if(!hits.length && c.name==='ESPN2') hits=fs.filter(f=>norm(f.names[0])===norm('ESPN2 US'));
+   if(hits.length===1)manualMap[c.number]=hits[0].id;
+  }
+  saveMappings()
+   lastUpdated=new Date().toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET';
+  feedState='Schedule loaded';renderMapping();render();
+ }catch(e){feedState='Live schedule could not load: '+e.message+'. Check your internet connection and tap Refresh schedules.';render()}
+}
+$('adminToggle').onclick=()=>{const open=$('adminTools').hidden;$('adminTools').hidden=!open;$('adminSections').hidden=!open;$('adminToggle').setAttribute('aria-expanded',String(open));$('adminToggle').textContent=open?'⚙ Hide Admin Tools':'⚙ Admin Tools';if(!open){$('auditPanel').hidden=true;$('backupPanel').hidden=true;$('settingsPanel').hidden=true;}};
+$('refresh').onclick=refreshLive;
+refreshLive();
+
+// v3.0 portable progress backups. Only app preferences are exported, not EPG data.
+const backupKnownChannels=new Set(channels.map(c=>c.number));
+let pendingRestore=null;
+function backupSummary(){
+ $('backupStats').textContent=`${verifiedChannels.size} verified · ${favorites.size} favorites · ${Object.keys(manualMap).length} manually assigned feeds · ${disabledMap.size} disabled mappings · ${excludedChannels.size} not in HOA package · ${offlineChannels.size} temporarily offline`;
+}
+$('backupButton').onclick=()=>{$('backupPanel').hidden=!$('backupPanel').hidden;backupSummary();if(!$('backupPanel').hidden)$('backupPanel').scrollIntoView({behavior:'smooth',block:'start'});};
+function downloadText(name,content,mime){const blob=new Blob([content],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
+$('exportBackup').onclick=()=>{
+ const data={format:'myrtle-beach-tv-guide-progress',schemaVersion:1,appVersion:'3.0',exportedAt:new Date().toISOString(),verifiedChannels:[...verifiedChannels].sort((a,b)=>Number(a)-Number(b)),favorites:[...favorites].sort((a,b)=>Number(a)-Number(b)),manualMap:{...manualMap},disabledMap:[...disabledMap].sort((a,b)=>Number(a)-Number(b)),excludedChannels:[...excludedChannels].sort((a,b)=>Number(a)-Number(b)),offlineChannels:[...offlineChannels].sort((a,b)=>Number(a)-Number(b))};
+ const date=new Date().toISOString().slice(0,10);
+ downloadText(`Myrtle_Beach_TV_Guide_Backup_${date}.json`,JSON.stringify(data,null,2),'application/json');
+ $('backupMessage').textContent='Backup file prepared. Check your Downloads folder and keep the JSON file safe.';
+};
+function validateBackup(d){
+ if(!d||typeof d!=='object'||Array.isArray(d)||d.format!=='myrtle-beach-tv-guide-progress'||d.schemaVersion!==1)throw Error('Not a supported Myrtle Beach TV Guide backup.');
+ for(const key of ['verifiedChannels','favorites','disabledMap']){
+  if(!Array.isArray(d[key])||d[key].length>channels.length||d[key].some(n=>typeof n!=='string'||!backupKnownChannels.has(n)))throw Error('Invalid '+key+' list.');
+ }
+ if(!d.manualMap||typeof d.manualMap!=='object'||Array.isArray(d.manualMap))throw Error('Invalid manual channel mappings.');
+ if(Object.keys(d.manualMap).length>channels.length||Object.entries(d.manualMap).some(([k,v])=>!backupKnownChannels.has(k)||typeof v!=='string'||v.length>250))throw Error('Invalid manual channel mapping entry.');
+ if(d.excludedChannels!==undefined && (!Array.isArray(d.excludedChannels)||d.excludedChannels.length>channels.length||d.excludedChannels.some(n=>typeof n!=='string'||!backupKnownChannels.has(n))))throw Error('Invalid HOA package list.');
+ if(d.offlineChannels!==undefined && (!Array.isArray(d.offlineChannels)||d.offlineChannels.length>channels.length||d.offlineChannels.some(n=>typeof n!=='string'||!backupKnownChannels.has(n))))throw Error('Invalid offline channel list.');
+  return {offlineChannels:d.offlineChannels===undefined?defaultOffline:[...new Set(d.offlineChannels)],excludedChannels:d.excludedChannels===undefined?defaultExcluded:[...new Set(d.excludedChannels)],verifiedChannels:[...new Set(d.verifiedChannels)],favorites:[...new Set(d.favorites)],disabledMap:[...new Set(d.disabledMap)],manualMap:Object.fromEntries(Object.entries(d.manualMap).filter(([k])=>!d.disabledMap.includes(k)))};
+}
+$('restoreFile').onchange=async e=>{
+ pendingRestore=null;$('restoreActions').hidden=true;$('restorePreview').hidden=true;$('backupMessage').textContent='';
+ const file=e.target.files?.[0];if(!file)return;
+ try{
+  if(file.size>250000)throw Error('Backup file is too large.');
+  const d=JSON.parse(await file.text());pendingRestore=validateBackup(d);
+  $('restorePreview').textContent=`Backup: ${pendingRestore.verifiedChannels.length} verified · ${pendingRestore.favorites.length} favorites · ${Object.keys(pendingRestore.manualMap).length} manual feed selections · ${pendingRestore.disabledMap.length} disabled mappings · ${pendingRestore.excludedChannels.length} not in HOA package · ${pendingRestore.offlineChannels.length} offline. Exported: ${d.exportedAt?new Date(d.exportedAt).toLocaleString():'date unknown'}. This will REPLACE the progress currently saved in this browser.`;
+  $('restorePreview').hidden=false;$('restoreActions').hidden=false;
+ }catch(err){$('backupMessage').textContent='Cannot restore: '+err.message;}
+};
+$('cancelRestore').onclick=()=>{pendingRestore=null;$('restoreFile').value='';$('restoreActions').hidden=true;$('restorePreview').hidden=true;$('backupMessage').textContent='Restore cancelled. No changes made.';};
+$('confirmRestore').onclick=()=>{
+ if(!pendingRestore)return;
+ const keys=['mbtv-verified-v2','mbtv-favorites','mbtv-mapping','mbtv-disabled-mapping','mbtv-hoa-excluded','mbtv-offline-v29'];
+ const old=keys.map(k=>localStorage.getItem(k));
+ const values=[JSON.stringify(pendingRestore.verifiedChannels),JSON.stringify(pendingRestore.favorites),JSON.stringify(pendingRestore.manualMap),JSON.stringify(pendingRestore.disabledMap),JSON.stringify(pendingRestore.excludedChannels),JSON.stringify(pendingRestore.offlineChannels)];
+ try{keys.forEach((k,i)=>localStorage.setItem(k,values[i]));}
+ catch(err){keys.forEach((k,i)=>{try{if(old[i]===null)localStorage.removeItem(k);else localStorage.setItem(k,old[i]);}catch(e){}});$('backupMessage').textContent='Restore failed to save. Your previous progress was preserved where possible: '+err.message;return;}
+ verifiedChannels.clear();pendingRestore.verifiedChannels.forEach(n=>verifiedChannels.add(n));
+ favorites.clear();pendingRestore.favorites.forEach(n=>favorites.add(n));
+ disabledMap.clear();pendingRestore.disabledMap.forEach(n=>disabledMap.add(n));
+ manualMap=pendingRestore.manualMap;
+ excludedChannels.clear();pendingRestore.excludedChannels.forEach(n=>excludedChannels.add(n));
+  offlineChannels.clear();pendingRestore.offlineChannels.forEach(n=>offlineChannels.add(n));
+ pendingRestore=null;$('restoreFile').value='';$('restoreActions').hidden=true;$('restorePreview').hidden=true;
+ backupSummary();renderMapping();renderAudit();render();
+ $('backupMessage').textContent='✓ Progress restored and saved! Your verification checkmarks, favorites, channel mappings, HOA exclusions, and offline statuses are now active.';
+};
+
+function buildPrintList(){
+ let sheet=document.getElementById('printChannelSheet');
+ if(!sheet){sheet=document.createElement('section');sheet.id='printChannelSheet';document.body.appendChild(sheet)}
+ sheet.replaceChildren();
+ const top=document.createElement('div');top.className='printTop';top.innerHTML='<h2>BAREFOOT NT NMB TV GUIDE</h2><small>HTC Channels · North Myrtle Beach · HOA Channel Lineup</small>';sheet.appendChild(top);
+ const standard=channels.filter(c=>c.category!=='Premium');
+ const cols=document.createElement('div');cols.className='printCols';
+ const per=Math.ceil(standard.length/3);
+ for(let i=0;i<3;i++){
+  const col=document.createElement('div');col.className='printCol';
+  for(const c of standard.slice(i*per,(i+1)*per)){
+   const line=document.createElement('div');line.className='printLine';
+   const num=document.createElement('span');num.className='printNum';num.textContent=c.number;
+   const name=document.createElement('span');name.className='printName';name.textContent=c.name;
+   line.append(num,name);col.appendChild(line);
+  }
+  cols.appendChild(col);
+ }
+ sheet.appendChild(cols);
+ const box=document.createElement('div');box.className='premiumBox';
+ const heading=document.createElement('div');heading.className='premiumTitle';heading.textContent='HOTEL / MOTEL — ONLY IF SUBSCRIBED (NOT INCLUDED IN HOA PACKAGE)';box.appendChild(heading);
+ const prem=document.createElement('div');prem.className='premiumCols';
+ for(const c of channels.filter(c=>c.category==='Premium')){
+  const line=document.createElement('div');line.className='premiumLine';
+  line.textContent=c.number+'   '+c.name.replace(/ \(if subscribed\)/i,'');prem.appendChild(line)
+ }
+ box.appendChild(prem);sheet.appendChild(box);
+ const foot=document.createElement('div');foot.className='foot';foot.textContent='Unofficial HOA reference · Channel availability may change · Verify with HTC';sheet.appendChild(foot);
+}
+window.addEventListener('beforeprint',buildPrintList);
+
+// v3.3: separate local-affiliate source, never replaces EPGTalk schedules or saved mappings.
+const LOCAL_URL='https://vcicio.github.io/US-EPG/states/SC.xml.gz';
+async function localTextFromBytes(bytes,compressed){
+ if(!compressed)return new TextDecoder().decode(bytes);
+ if(typeof DecompressionStream==='undefined')throw Error('This browser cannot unpack .gz. Download an uncompressed XMLTV file or try a current Chrome browser.');
+ const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+ return await new Response(stream).text();
+}
+function applyLocalXML(xml){
+ const doc=new DOMParser().parseFromString(xml,'application/xml');
+ if(doc.querySelector('parsererror'))throw Error('The file is not valid XMLTV');
+ const ch=[...doc.getElementsByTagName('channel')];
+ const found={};
+ for(const [num,name] of Object.entries(localNames)){
+  const matches=ch.filter(el=>{
+   const id=el.getAttribute('id')||'';
+   const labels=[...el.getElementsByTagName('display-name')].map(x=>x.textContent||'');
+   return [id,...labels].some(x=>new RegExp('(^|[^A-Za-z0-9])'+name+'([^A-Za-z0-9]|$)','i').test(x));
+  });
+  if(matches.length===1)found[num]=matches[0].getAttribute('id');
+ }
+ const ids=new Set(Object.values(found));const parsed=[];
+ for(const p of doc.getElementsByTagName('programme')){
+  const id=p.getAttribute('channel');if(!ids.has(id))continue;
+  const start=parseTime(p.getAttribute('start')),end=parseTime(p.getAttribute('stop'));
+  if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start)continue;
+  parsed.push({id,start,end,title:p.getElementsByTagName('title')[0]?.textContent||'Untitled',desc:p.getElementsByTagName('desc')[0]?.textContent||''});
+ }
+ if(!parsed.length)throw Error('No upcoming usable programs found for the four exact local stations');
+ localPrograms.splice(0,localPrograms.length,...parsed);localProgramIndex=indexPrograms(localPrograms);Object.keys(localFeedIDs).forEach(k=>delete localFeedIDs[k]);Object.assign(localFeedIDs,found);
+ const matched=Object.keys(found).map(n=>n+' '+localNames[n]);
+ $('localStatus').textContent='Loaded '+parsed.length+' local program entries · '+matched.length+'/4 stations: '+matched.join(', ')+'. Check schedules against HTC before HOA distribution.';
+ renderMapping();render();
+}
+async function loadLocalAutomatically(){
+ $('localStatus').textContent='Trying free South Carolina XMLTV feed…';
+ try{
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),90000);
+  let res;try{res=await fetch(LOCAL_URL,{cache:'no-store',signal:controller.signal});}finally{clearTimeout(timer)}
+  if(!res.ok)throw Error('HTTP '+res.status);
+  const bytes=await res.arrayBuffer();const xml=await localTextFromBytes(bytes,true);applyLocalXML(xml);
+ }catch(e){$('localStatus').textContent='Automatic load unavailable: '+e.message+'. Download SC.xml.gz and import it below. Existing EPGTalk schedules are safe.';}
+}
+$('localAuto').onclick=loadLocalAutomatically;
+if(location.protocol==='https:' && location.hostname.endsWith('.github.io')){
+ $('localStatus').textContent='Hosted website detected. Preparing automatic local station schedules…';
+ setTimeout(loadLocalAutomatically,1200);
+}
+$('localFile').onchange=async e=>{
+ try{const file=e.target.files?.[0];if(!file)return;const xml=await localTextFromBytes(await file.arrayBuffer(),/\.gz$/i.test(file.name));applyLocalXML(xml)}
+ catch(err){$('localStatus').textContent='Import failed: '+err.message;}
+};
+$('localClear').onclick=()=>{localPrograms.length=0;Object.keys(localFeedIDs).forEach(k=>delete localFeedIDs[k]);$('localStatus').textContent='Local feed cleared; EPGTalk schedules remain intact.';render()};
+</script></body></html>
