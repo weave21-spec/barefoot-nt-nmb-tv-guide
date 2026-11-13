@@ -1,0 +1,25 @@
+{
+  "name": "Barefoot NT TV Guide",
+  "short_name": "Barefoot NT",
+  "description": "North Myrtle Beach HTC television schedule guide",
+  "id": "./barefoot-nt-tv-guide",
+  "start_url": "./Barefoot_NT_TV_Guide_v4_1_Home_Screen_Pilot.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#123b60",
+  "theme_color": "#123b60",
+  "icons": [
+    {
+      "src": "./barefoot-nt-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./barefoot-nt-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
